@@ -13,6 +13,26 @@
 
 ---
 
+## 安装与使用
+
+### 方式一：下载 EXE 文件（推荐）
+
+> 适合不想安装 Python 环境的用户
+
+1. 点击仓库右侧的 **Releases** 或直接访问 [Releases 页面](https://github.com/iwanglei1/OneClickCopaw/releases)
+2. 下载最新版本的 `main.exe` 文件
+3. 双击运行即可
+
+**就是这么简单！** 无需安装 Python，无需配置环境，一键启动。
+
+### 方式二：从源码运行
+
+> 适合开发者或需要自定义的用户
+
+详见下方 [快速开始](#快速开始) 章节。
+
+---
+
 ## 功能特点
 
 - **一键初始化** - 自动执行 `copaw init --defaults --accept-security`
