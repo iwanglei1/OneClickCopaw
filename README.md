@@ -1,0 +1,177 @@
+# OneClickCopaw
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10+-blue.svg" alt="Python">
+  <img src="https://img.shields.io/badge/PySide6-GUI-green.svg" alt="PySide6">
+  <img src="https://img.shields.io/badge/Platform-Windows-lightgrey.svg" alt="Platform">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
+</p>
+
+<p align="center">
+  <strong>一键启动 Copaw 桌面环境的图形化工具</strong>
+</p>
+
+---
+
+## 功能特点
+
+- **一键初始化** - 自动执行 `copaw init --defaults --accept-security`
+- **一键启动** - 自动启动 Copaw 桌面环境
+- **图形化界面** - 基于 PySide6 的现代化 GUI
+- **实时日志** - 深色主题控制台，实时显示执行状态
+- **独立可执行文件** - 支持 PyInstaller 打包为单个 EXE 文件
+
+## 界面预览
+
+```
+┌─────────────────────────────────────────────────────┐
+│              一键启动环境                             │
+├─────────────────────────────────────────────────────┤
+│  >>> 开始执行: copaw init --defaults                │
+│  -------------------------------------------------- │
+│  ✓ 初始化完成！                                      │
+│  >>> 开始执行: copaw desktop                         │
+│  -------------------------------------------------- │
+│  ✓ 所有任务执行完毕！                                │
+├─────────────────────────────────────────────────────┤
+│           [  一键初始化并启动  ]                      │
+└─────────────────────────────────────────────────────┘
+```
+
+## 快速开始
+
+### 方式一：直接运行（需要 Python 环境）
+
+1. **克隆仓库**
+   ```bash
+   git clone https://github.com/iwanglei1/OneClickCopaw.git
+   cd OneClickCopaw
+   ```
+
+2. **安装依赖**
+   ```bash
+   pip install PySide6 copaw reme
+   ```
+
+3. **运行程序**
+   ```bash
+   python main.py
+   ```
+
+### 方式二：打包为 EXE 文件
+
+1. **安装打包工具**
+   ```bash
+   pip install pyinstaller PySide6 copaw reme
+   ```
+
+2. **执行打包脚本**
+   ```bash
+   python build_exe.py
+   ```
+
+3. **获取可执行文件**
+
+   打包完成后，在 `dist/` 目录下找到 `main.exe`
+
+## 项目结构
+
+```
+OneClickCopaw/
+├── main.py        # 主程序（GUI + CLI 适配器）
+├── build_exe.py   # PyInstaller 打包脚本
+├── find.py        # 入口点查找工具
+├── .gitignore     # Git 忽略规则
+└── README.md      # 项目说明文档
+```
+
+## 技术实现
+
+### 核心功能
+
+| 功能模块 | 说明 |
+|---------|------|
+| CLI 拦截器 | 自动处理 Copaw CLI 的交互式提示 |
+| 进程适配 | 绕过 PyInstaller 下 uvicorn 的字符串加载问题 |
+| GUI 界面 | PySide6 实现的现代化图形界面 |
+| 日志系统 | QProcess 实时捕获并显示命令输出 |
+
+### 支持的 Copaw 渠道
+
+打包脚本已内置以下渠道的隐式导入：
+
+- Discord
+- Telegram
+- 钉钉 (DingTalk)
+- 飞书 (Feishu)
+- iMessage
+- Matrix
+- Mattermost
+- MQTT
+- QQ
+- Voice (Twilio)
+
+## 依赖项
+
+- Python >= 3.10
+- PySide6
+- copaw
+- reme
+- PyInstaller (打包时需要)
+
+## 常见问题
+
+<details>
+<summary><b>Q: 打包后的 EXE 文件太大怎么办？</b></summary>
+
+这是正常现象，PyInstaller 会将 Python 运行时和所有依赖打包进单个文件。可以使用 UPX 压缩（已在打包脚本中启用）来减小体积。
+</details>
+
+<details>
+<summary><b>Q: 启动时提示缺少模块？</b></summary>
+
+请确保在打包前已安装所有依赖：`pip install PySide6 copaw reme`
+</details>
+
+<details>
+<summary><b>Q: 如何更新到最新版本？</b></summary>
+
+```bash
+git pull origin main
+pip install --upgrade copaw reme
+python build_exe.py
+```
+</details>
+
+## 开发计划
+
+- [ ] 添加系统托盘图标
+- [ ] 支持自定义初始化参数
+- [ ] 多语言支持
+- [ ] 自动更新功能
+
+## 贡献指南
+
+欢迎提交 Issue 和 Pull Request！
+
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 创建 Pull Request
+
+## 许可证
+
+本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
+
+## 致谢
+
+- [Copaw](https://github.com/xing61/copaw) - 核心框架
+- [PySide6](https://www.qt.io/qt-for-python) - GUI 框架
+- [PyInstaller](https://pyinstaller.org/) - 打包工具
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/iwanglei1">iwanglei1</a>
+</p>
