@@ -25,11 +25,11 @@
 
 **就是这么简单！** 无需安装 Python，无需配置环境，一键启动。
 
-### 方式二：从源码运行
+### 方式二：学习如何打包
 
-> 适合开发者或需要自定义的用户
+> 适合想学习如何将 Copaw 打包成一键安装包的高级用户
 
-详见下方 [快速开始](#快速开始) 章节。
+详见下方 [打包教程](#打包教程) 章节。
 
 ---
 
@@ -58,11 +58,13 @@
 └─────────────────────────────────────────────────────┘
 ```
 
-## 快速开始
+## 打包教程
 
-### 方式一：直接运行（需要 Python 环境）
+本项目的核心价值在于：**教你如何将 Copaw 打包成一个无需 Python 环境的一键安装包**。
 
-1. **克隆仓库**
+### 打包步骤
+
+1. **克隆项目**
    ```bash
    git clone https://github.com/iwanglei1/OneClickCopaw.git
    cd OneClickCopaw
@@ -70,29 +72,33 @@
 
 2. **安装依赖**
    ```bash
-   pip install PySide6 copaw reme
-   ```
-
-3. **运行程序**
-   ```bash
-   python main.py
-   ```
-
-### 方式二：打包为 EXE 文件
-
-1. **安装打包工具**
-   ```bash
    pip install pyinstaller PySide6 copaw reme
    ```
 
-2. **执行打包脚本**
+3. **执行打包**
    ```bash
    python build_exe.py
    ```
 
-3. **获取可执行文件**
+4. **获取 EXE 文件**
 
    打包完成后，在 `dist/` 目录下找到 `main.exe`
+
+### 核心技术点
+
+本项目解决了以下打包难题：
+
+| 问题 | 解决方案 |
+|-----|---------|
+| CLI 交互式提示阻塞 | 拦截 `--internal-cli` 参数，模拟用户输入 |
+| PyInstaller 下 uvicorn 加载失败 | 直接导入 app 对象，绕过字符串加载 |
+| 隐式导入缺失 | 自动收集所有包的 metadata 和 hiddenimports |
+| GUI 实时日志 | 使用 QProcess 捕获子进程输出 |
+
+### 关键文件说明
+
+- **[main.py](main.py)** - 主程序，包含 GUI 界面和 CLI 适配器
+- **[build_exe.py](build_exe.py)** - 自动生成 .spec 文件并执行打包
 
 ## 项目结构
 
